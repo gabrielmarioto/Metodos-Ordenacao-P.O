@@ -333,10 +333,10 @@ public class Arquivo
         }
     }
 
-    public void ShellArq() throws IOException
+     public void ShellArq() throws IOException
     {
         int j, k, i, dist = 4;
-        Registro reg1 = new Registro(), reg2 = new Registro(), aux = new Registro();
+        Registro reg1 = new Registro(), reg2 = new Registro();
         Registro auxK = new Registro();
         int tl = (int) filesize();
 
@@ -345,8 +345,6 @@ public class Arquivo
             for (i = 0; i < dist; i++)
             {
                 j = i;
-                seekArq(j + dist);
-                aux.leDoArq(arquivo);
                 while (j + dist < tl)
                 {
                     seekArq(j);
@@ -360,18 +358,18 @@ public class Arquivo
                         seekArq(j);
                         reg2.gravaNoArq(arquivo);
                         k = j;
-                        seekArq(k);
-                        auxK.leDoArq(arquivo);
                         seekArq(k - dist);
-                        aux.leDoArq(arquivo);
+                        auxK.leDoArq(arquivo);
 
-                        while (k - dist >= 1 && auxK.getNumero()< aux.getNumero())
+                        while (k - dist >= i && reg2.getNumero()< auxK.getNumero())
                         {
                             seekArq(k - dist);
-                            auxK.gravaNoArq(arquivo);
+                            reg2.gravaNoArq(arquivo);
                             seekArq(k);
-                            aux.gravaNoArq(arquivo);
+                            auxK.gravaNoArq(arquivo);
                             k = k - dist;
+                            seekArq(k - dist);
+                            auxK.leDoArq(arquivo);
                         }
                     }
                     j += dist;
