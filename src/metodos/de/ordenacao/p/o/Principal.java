@@ -24,15 +24,13 @@ public class Principal
 
     public Principal()
     {
-
         arqOrd = new Arquivo("Ordenado.dat");
         arqRev = new Arquivo("Reverso.dat");
         arqRand = new Arquivo("Random.dat");
         auxRev = new Arquivo("auxRev.dat");
         auxRand = new Arquivo("auxRand.dat");
-
     }
-
+    //comparacao feita, comparacao esperada, movimentacao feita, movimentacao esperada, tempo total
     public void gravaLinha(int compP, int compE, int movP, int movE, int tempo)
     {
         System.out.println("\t\t|" + compP + "\t\t|" + compE + "\t\t|" + movP + "\t\t|" + movE + "\t\t|" + tempo + "\t\t|");
@@ -41,6 +39,7 @@ public class Principal
     public void insercaoDireta() throws IOException
     {
         //Arquivo Ordenado
+        System.out.println("Arquivo Ordenado");
         arqOrd.initComp();
         arqOrd.initMov();
         tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
@@ -49,23 +48,29 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-        System.out.println("Arquivo Ordenado");
-        gravaLinha(compO, (int) ((Math.pow((int) arqOrd.filesize(), 2) - (int) arqOrd.filesize()) / 2), movO, (int) (arqOrd.filesize() * (Math.log((double) arqOrd.filesize()) + 0.577216f)), ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        
+        //
+        gravaLinha(compO,(int) arqOrd.filesize()-1, movO, (int) (3 * (arqOrd.filesize() -1 )), ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
 
         //Arquivo Reverso
+        
+        arqRev.seekArq(0);
         auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
         auxRev.initComp();
         auxRev.initMov();
         tini = (int) System.currentTimeMillis();
+        System.out.println("Arquivo Reverso");
         auxRev.InsercaoDiretaArq();
         tfim = (int) System.currentTimeMillis();
         ttotalRev = tfim - tini;
         compRev = auxRev.getComp();
         movRev = auxRev.getMov();
-        System.out.println("Arquivo Reverso");
-        gravaLinha(compRev, (int) ((Math.pow((int) auxRev.filesize(), 2) - (int) auxRev.filesize()) / 2), movRev, (int) (auxRev.filesize() * (Math.log((double) auxRev.filesize()) + 0.577216f)), ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+        
+        
+        gravaLinha(compRev, (int) ((Math.pow((int) auxRev.filesize(), 2) + (int) auxRev.filesize()) -4) / 2, movRev, (int) ((Math.pow((int) auxRev.filesize(), 2) + 3 * auxRev.filesize() - 4)/2), ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
 
         //Arquivo Randomico
+        arqRand.seekArq(0);
         auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
         auxRand.initComp();
         auxRand.initMov();
@@ -76,9 +81,19 @@ public class Principal
         compRand = auxRand.getComp();
         movRand = auxRand.getMov();
         System.out.println("Arquivo Randomico");
-        gravaLinha(compRand, (int) ((Math.pow((int) auxRand.filesize(), 2) - (int) auxRand.filesize()) / 2), movRand, (int) (auxRand.filesize() * (Math.log((double) auxRand.filesize()) + 0.577216f)), ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos
+        gravaLinha(compRand, (int) ((Math.pow((int) auxRand.filesize(), 2) + (int) auxRand.filesize() -2) / 4), movRand, (int) ((Math.pow((int) auxRev.filesize(), 2) + 9 * auxRev.filesize() - 10)/4), ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos
+
+
+        arqOrd = new Arquivo("Ordenado.dat");
+        arqRev = new Arquivo("Reverso.dat");
+        arqRand = new Arquivo("Random.dat");
+        auxRev = new Arquivo("auxRev.dat");
+        auxRand = new Arquivo("auxRand.dat");
 
     }
+
+   
+    
 
     public void geraTabela() throws IOException
     {

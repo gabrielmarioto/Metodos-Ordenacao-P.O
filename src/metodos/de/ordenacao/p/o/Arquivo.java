@@ -57,15 +57,26 @@ public class Arquivo
         }
     }
 
+    public boolean eof(RandomAccessFile arquivoOrigem)
+    {
+        boolean retorno = false;
+        try
+        {
+            if (arquivoOrigem.getFilePointer() == arquivoOrigem.length())
+                retorno = true;
+        } catch (IOException e)
+        {
+        }
+        return (retorno);
+    }
+
     public boolean eof()
     {
         boolean retorno = false;
         try
         {
             if (arquivo.getFilePointer() == arquivo.length())
-            {
                 retorno = true;
-            }
         } catch (IOException e)
         {
         }
@@ -110,26 +121,20 @@ public class Arquivo
     public void geraArquivoOrdenado()
     {
         for (int i = 0; i < 1024; i++)
-        {
             new Registro(i).gravaNoArq(arquivo);
-        }
     }
 
     public void geraArquivoReverso()
     {
         for (int i = 1023; i >= 0; i--)
-        {
             new Registro(i).gravaNoArq(arquivo);
-        }
     }
 
     public void geraArquivoRandomico()
     {
         Random random = new Random();
         for (int i = 0; i < 1024; i++)
-        {
             new Registro(random.nextInt(1000000)).gravaNoArq(arquivo);
-        }
     }
 
     public int buscaBinariaArq(int chave, int tl)
@@ -143,15 +148,12 @@ public class Arquivo
         while (inicio < fim && reg1.getNumero() != chave)
         {
             if (reg1.getNumero() == chave)
-            {
                 return meio;
-            } else if (chave > reg1.getNumero())
-            {
-                inicio = meio + 1;
-            } else
-            {
-                fim = meio - 1;
-            }
+            else
+                if (chave > reg1.getNumero())
+                    inicio = meio + 1;
+                else
+                    fim = meio - 1;
 
             meio = (inicio + fim) / 2;
 
@@ -159,9 +161,7 @@ public class Arquivo
             reg1.leDoArq(arquivo);
         }
         if (chave > reg1.getNumero())
-        {
             return meio + 1;
-        }
         return meio;
     }
 
@@ -209,7 +209,7 @@ public class Arquivo
                 pos--;
                 seekArq(pos - 1);
                 reg1.leDoArq(arquivo);
-                comp++;
+                comp++;comp++;
                 mov++;
             }
             i++;
@@ -333,7 +333,7 @@ public class Arquivo
         }
     }
 
-     public void ShellArq() throws IOException
+    public void ShellArq() throws IOException
     {
         int j, k, i, dist = 4;
         Registro reg1 = new Registro(), reg2 = new Registro();
@@ -351,7 +351,7 @@ public class Arquivo
                     reg1.leDoArq(arquivo);
                     seekArq(j + dist);
                     reg2.leDoArq(arquivo);
-                    if (reg1.getNumero()> reg2.getNumero())
+                    if (reg1.getNumero() > reg2.getNumero())
                     {
                         seekArq(j + dist);
                         reg1.gravaNoArq(arquivo);
@@ -361,7 +361,7 @@ public class Arquivo
                         seekArq(k - dist);
                         auxK.leDoArq(arquivo);
 
-                        while (k - dist >= i && reg2.getNumero()< auxK.getNumero())
+                        while (k - dist >= i && reg2.getNumero() < auxK.getNumero())
                         {
                             seekArq(k - dist);
                             reg2.gravaNoArq(arquivo);
