@@ -35,6 +35,7 @@ public class Arquivo
     public void copiaArquivo(RandomAccessFile arquivoOrigem)
     {
         Registro r = new Registro();
+        seekArq(0);
         while (!eof(arquivoOrigem))
         {
             r.leDoArq(arquivoOrigem);
@@ -121,14 +122,14 @@ public class Arquivo
     public void geraArquivoOrdenado()
     {
 //        for (int i = 0; i < 1024; i++)
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 8; i++)
             new Registro(i).gravaNoArq(arquivo);
     }
 
     public void geraArquivoReverso()
     {
 //        for (int i = 1023; i >= 0; i--)
-        for (int i = 10; i >= 0; i--)
+        for (int i = 8; i >= 0; i--)
             new Registro(i).gravaNoArq(arquivo);
     }
 
@@ -136,7 +137,7 @@ public class Arquivo
     {
         Random random = new Random();
 //        for (int i = 0; i < 1024; i++)
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 8; i++)
             new Registro(random.nextInt(1000000)).gravaNoArq(arquivo);
     }
 
@@ -205,6 +206,7 @@ public class Arquivo
             reg2.leDoArq(arquivo);
             seekArq(i - 1);
             reg1.leDoArq(arquivo);
+            comp++;
             while (pos > 0 && reg2.getNumero() < reg1.getNumero())
             {
                 seekArq(pos);
@@ -212,9 +214,8 @@ public class Arquivo
                 pos--;
                 seekArq(pos - 1);
                 reg1.leDoArq(arquivo);
-                comp++;
-                comp++;
                 mov++;
+                comp++;
             }
             i++;
             seekArq(pos);
