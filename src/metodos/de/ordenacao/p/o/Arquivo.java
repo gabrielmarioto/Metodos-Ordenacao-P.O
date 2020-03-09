@@ -64,7 +64,9 @@ public class Arquivo
         try
         {
             if (arquivoOrigem.getFilePointer() == arquivoOrigem.length())
+            {
                 retorno = true;
+            }
         } catch (IOException e)
         {
         }
@@ -77,7 +79,9 @@ public class Arquivo
         try
         {
             if (arquivo.getFilePointer() == arquivo.length())
+            {
                 retorno = true;
+            }
         } catch (IOException e)
         {
         }
@@ -123,14 +127,18 @@ public class Arquivo
     {
 //        for (int i = 0; i < 1024; i++)
         for (int i = 0; i < 8; i++)
+        {
             new Registro(i).gravaNoArq(arquivo);
+        }
     }
 
     public void geraArquivoReverso()
     {
 //        for (int i = 1023; i >= 0; i--)
         for (int i = 8; i >= 0; i--)
+        {
             new Registro(i).gravaNoArq(arquivo);
+        }
     }
 
     public void geraArquivoRandomico()
@@ -138,7 +146,9 @@ public class Arquivo
         Random random = new Random();
 //        for (int i = 0; i < 1024; i++)
         for (int i = 0; i < 8; i++)
+        {
             new Registro(random.nextInt(1000000)).gravaNoArq(arquivo);
+        }
     }
 
     public int buscaBinariaArq(int chave, int tl)
@@ -152,12 +162,15 @@ public class Arquivo
         while (inicio < fim && reg1.getNumero() != chave)
         {
             if (reg1.getNumero() == chave)
+            {
                 return meio;
-            else
-                if (chave > reg1.getNumero())
-                    inicio = meio + 1;
-                else
-                    fim = meio - 1;
+            } else if (chave > reg1.getNumero())
+            {
+                inicio = meio + 1;
+            } else
+            {
+                fim = meio - 1;
+            }
 
             meio = (inicio + fim) / 2;
 
@@ -165,7 +178,9 @@ public class Arquivo
             reg1.leDoArq(arquivo);
         }
         if (chave > reg1.getNumero())
+        {
             return meio + 1;
+        }
         return meio;
     }
 
@@ -181,15 +196,19 @@ public class Arquivo
             seekArq(i);
             aux.leDoArq(arquivo);
             pos = buscaBinariaArq(aux.getNumero(), i);
+            comp++;
             for (j = i; j > pos; j--)
             {
                 seekArq(j - 1);
                 reg1.leDoArq(arquivo);
                 seekArq(j);
                 reg1.gravaNoArq(arquivo);
+                comp++;
+                mov++;
             }
             seekArq(pos);
             aux.gravaNoArq(arquivo);
+            mov++;
         }
     }
 
@@ -237,14 +256,18 @@ public class Arquivo
                 seekArq(i);
                 reg1.leDoArq(arquivo);
                 reg2.leDoArq(arquivo);
+                comp++;
                 if (reg1.getNumero() > reg2.getNumero())
                 {
                     seekArq(i);
                     reg2.gravaNoArq(arquivo);
                     reg1.gravaNoArq(arquivo);
+                    comp++;
                 }
+                mov++;
             }
             tl--;
+            mov++;
         }
     }
 
@@ -269,19 +292,23 @@ public class Arquivo
             {
                 seekArq(j);
                 aux.leDoArq(arquivo);
+                comp++;
                 if (aux.getNumero() < menor.getNumero())
                 {
                     seekArq(j);
                     menor.leDoArq(arquivo);
                     posmenor = j;
+                    comp++;
                 }
                 j++;
+                mov++;
             }
             seekArq(i);
             menor.gravaNoArq(arquivo);
             seekArq(posmenor);
             num.gravaNoArq(arquivo);
             i++;
+            mov++;
         }
     }
 
@@ -306,25 +333,29 @@ public class Arquivo
                 fe.leDoArq(arquivo);
                 seekArq(pai + pai + 2);
                 fd.leDoArq(arquivo);
+                comp++;
                 if (pai + pai + 2 < tl && fd.getNumero() > fe.getNumero())
                 {
                     seekArq(pai + pai + 2);
                     maiorF.leDoArq(arquivo);
                     posMaiorF = pai + pai + 2;
+                     comp++;
                 } else
                 {
                     seekArq(pai + pai + 1);
                     maiorF.leDoArq(arquivo);
                     posMaiorF = pai + pai + 1;
                 }
-
+                comp++;
                 if (maiorF.getNumero() > reg1.getNumero())
                 {
                     seekArq(pai);
                     maiorF.gravaNoArq(arquivo);
                     seekArq(posMaiorF);
                     reg1.gravaNoArq(arquivo);
+                     comp++;
                 }
+                mov++;
             }
             seekArq(0);
             aux.leDoArq(arquivo);
@@ -335,6 +366,7 @@ public class Arquivo
             seekArq(0);
             aux1.gravaNoArq(arquivo);
             tl--;
+            mov++;
         }
     }
 
@@ -356,6 +388,7 @@ public class Arquivo
                     reg1.leDoArq(arquivo);
                     seekArq(j + dist);
                     reg2.leDoArq(arquivo);
+                    comp++;
                     if (reg1.getNumero() > reg2.getNumero())
                     {
                         seekArq(j + dist);
@@ -365,7 +398,7 @@ public class Arquivo
                         k = j;
                         seekArq(k - dist);
                         auxK.leDoArq(arquivo);
-
+                        comp++;
                         while (k - dist >= i && reg2.getNumero() < auxK.getNumero())
                         {
                             seekArq(k - dist);
@@ -375,12 +408,18 @@ public class Arquivo
                             k = k - dist;
                             seekArq(k - dist);
                             auxK.leDoArq(arquivo);
+                            mov++;
+                            comp++;
                         }
+                        comp++;
                     }
                     j += dist;
+                    mov++;
                 }
+                mov++;
             }
             dist /= 2;
+            mov++;
         }
     }
 }
