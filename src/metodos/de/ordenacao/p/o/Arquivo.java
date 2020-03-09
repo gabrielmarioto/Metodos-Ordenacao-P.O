@@ -120,20 +120,23 @@ public class Arquivo
 
     public void geraArquivoOrdenado()
     {
-        for (int i = 0; i < 1024; i++)
+//        for (int i = 0; i < 1024; i++)
+        for (int i = 0; i < 10; i++)
             new Registro(i).gravaNoArq(arquivo);
     }
 
     public void geraArquivoReverso()
     {
-        for (int i = 1023; i >= 0; i--)
+//        for (int i = 1023; i >= 0; i--)
+        for (int i = 10; i >= 0; i--)
             new Registro(i).gravaNoArq(arquivo);
     }
 
     public void geraArquivoRandomico()
     {
         Random random = new Random();
-        for (int i = 0; i < 1024; i++)
+//        for (int i = 0; i < 1024; i++)
+        for (int i = 0; i < 10; i++)
             new Registro(random.nextInt(1000000)).gravaNoArq(arquivo);
     }
 
@@ -209,7 +212,8 @@ public class Arquivo
                 pos--;
                 seekArq(pos - 1);
                 reg1.leDoArq(arquivo);
-                comp++;comp++;
+                comp++;
+                comp++;
                 mov++;
             }
             i++;
