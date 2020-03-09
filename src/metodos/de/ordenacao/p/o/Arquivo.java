@@ -35,7 +35,7 @@ public class Arquivo
     public void copiaArquivo(RandomAccessFile arquivoOrigem)
     {
         Registro r = new Registro();
-        while (!eof())
+        while (!eof(arquivoOrigem))
         {
             r.leDoArq(arquivoOrigem);
             r.gravaNoArq(arquivo);
