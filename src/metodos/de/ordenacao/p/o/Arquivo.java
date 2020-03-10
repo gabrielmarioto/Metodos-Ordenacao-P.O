@@ -355,7 +355,8 @@ public class Arquivo
                     maiorF.gravaNoArq(arquivo);
                     seekArq(posMaiorF);
                     reg1.gravaNoArq(arquivo);
-                     comp++;
+                    mov++;
+                    mov++;
                 }
                 mov++;
             }
@@ -368,6 +369,7 @@ public class Arquivo
             seekArq(0);
             aux1.gravaNoArq(arquivo);
             tl--;
+            mov++;
             mov++;
         }
     }
@@ -400,6 +402,8 @@ public class Arquivo
                         k = j;
                         seekArq(k - dist);
                         auxK.leDoArq(arquivo);
+                        mov++;
+                        mov++;
                         comp++;
                         while (k - dist >= i && reg2.getNumero() < auxK.getNumero())
                         {
@@ -411,9 +415,9 @@ public class Arquivo
                             seekArq(k - dist);
                             auxK.leDoArq(arquivo);
                             mov++;
+                            mov++;
                             comp++;
                         }
-                        comp++;
                     }
                     j += dist;
                     mov++;
