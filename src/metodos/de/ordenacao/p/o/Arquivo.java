@@ -195,8 +195,8 @@ public class Arquivo
         {
             seekArq(i);
             aux.leDoArq(arquivo);
-            pos = buscaBinariaArq(aux.getNumero(), i);
             comp++;
+            pos = buscaBinariaArq(aux.getNumero(), i);            
             for (j = i; j > pos; j--)
             {
                 seekArq(j - 1);
@@ -263,6 +263,7 @@ public class Arquivo
                     reg2.gravaNoArq(arquivo);
                     reg1.gravaNoArq(arquivo);
                     comp++;
+                    mov++;
                 }
                 mov++;
             }
@@ -308,6 +309,7 @@ public class Arquivo
             seekArq(posmenor);
             num.gravaNoArq(arquivo);
             i++;
+            mov++;
             mov++;
         }
     }
