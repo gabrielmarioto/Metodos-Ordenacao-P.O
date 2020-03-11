@@ -49,7 +49,7 @@ public class Principal
     //comparacao programa, comparacao esperada, movimentacao programa, movimentacao esperada, tempo total
     public void gravaLinha(int compP, int compE, int movP, int movE, int tempo) throws IOException
     {
-        pw.println("\t|    " + compP + "\t\t|    " + compE + "\t\t|    " + movP + "\t\t|    " + movE + "\t\t|   " + tempo + "\t\t|");
+        pw.println("\t|" + compP + "\t\t|" + compE + "\t\t|" + movP + "\t\t|" + movE + "\t\t|" + tempo + "\t\t|");
     }
 
     public void insercaoDireta() throws IOException // CERTO
@@ -243,7 +243,8 @@ public class Principal
 
     public void Heap() throws IOException
     {
-        pw.print("\n|Heap|\t\t");
+        pw.println("\n|   Heap Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
         arqOrd.initComp();
         arqOrd.initMov();
         tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
@@ -252,9 +253,10 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
+        
+        pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
 
-//        System.out.println("Arquivo Ordenado");
-//        gravaLinha(compO, (int) arqOrd.filesize() - 1, movO, (int) (3 * (arqOrd.filesize() - 1)), ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
         auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
@@ -266,9 +268,9 @@ public class Principal
         ttotalRev = tfim - tini;
         compRev = auxRev.getComp();
         movRev = auxRev.getMov();
-
-//        System.out.println("Arquivo Reverso");
-//        gravaLinha(compRev, (int) ((Math.pow((int) auxRev.filesize(), 2) + (int) auxRev.filesize()) - 4) / 2, movRev, (int) ((Math.pow((int) auxRev.filesize(), 2) + 3 * auxRev.filesize() - 4) / 2), ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+        
         //Arquivo Randomico
         arqRand.seekArq(0);
         auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
@@ -280,14 +282,15 @@ public class Principal
         ttotalRand = tfim - tini;
         compRand = auxRand.getComp();
         movRand = auxRand.getMov();
-//        System.out.println("Arquivo Randomico");
-//        gravaLinha(compRand, (int) ((Math.pow((int) auxRand.filesize(), 2) + (int) auxRand.filesize() - 2) / 4), movRand, (int) ((Math.pow((int) auxRev.filesize(), 2) + 9 * auxRev.filesize() - 10) / 4), ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
-
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
 
     public void Shell() throws IOException
     {
-        pw.print("\n|Inserção direta\t\t");
+        pw.println("\n|   Shell Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
         arqOrd.initComp();
         arqOrd.initMov();
         tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
@@ -296,9 +299,9 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-
-//        System.out.println("Arquivo Ordenado");
-//        gravaLinha(compO, (int) arqOrd.filesize() - 1, movO, (int) (3 * (arqOrd.filesize() - 1)), ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+      
+         pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
         auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
@@ -311,8 +314,9 @@ public class Principal
         compRev = auxRev.getComp();
         movRev = auxRev.getMov();
 
-//        System.out.println("Arquivo Reverso");
-//        gravaLinha(compRev, (int) ((Math.pow((int) auxRev.filesize(), 2) + (int) auxRev.filesize()) - 4) / 2, movRev, (int) ((Math.pow((int) auxRev.filesize(), 2) + 3 * auxRev.filesize() - 4) / 2), ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+
         //Arquivo Randomico
         arqRand.seekArq(0);
         auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
@@ -324,29 +328,272 @@ public class Principal
         ttotalRand = tfim - tini;
         compRand = auxRand.getComp();
         movRand = auxRand.getMov();
-
-//        System.out.println("Arquivo Randomico");
-//        gravaLinha(compRand, (int) ((Math.pow((int) auxRand.filesize(), 2) + (int) auxRand.filesize() - 2) / 4), movRand, (int) ((Math.pow((int) auxRev.filesize(), 2) + 9 * auxRev.filesize() - 10) / 4), ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        
     }
+    public void GnomeSort() throws IOException
+    {
+        pw.println("\n|   Gnome Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.GnomeSortArq();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+      
+         pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.GnomeSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
 
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.GnomeSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
+    public void CombSort() throws IOException
+    {
+        pw.println("\n|   Comb Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.CombSortArq();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+      
+         pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.CombSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.CombSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
+    
+    public void ShakeSort() throws IOException
+    {
+        pw.println("\n|   Shake Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.ShakeSortArq();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+        
+         pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.ShakeSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.ShakeSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
+    
+    public void QuickPivo() throws IOException
+    {
+        pw.println("|   Quick Pivot Sort\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.QuickComPivoArq();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+        
+         pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.QuickComPivoArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.QuickComPivoArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
+    
+    public void QuickSort() throws IOException
+    {
+        pw.println("\n|   Quick Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.QuickSemPivoArq();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+        
+         pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.QuickSemPivoArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.QuickSemPivoArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
     public void geraTabela() throws IOException
     {
         arqOrd.geraArquivoOrdenado();
         arqRev.geraArquivoReverso();
         arqRand.geraArquivoRandomico();
+        
         insercaoDireta();
+        System.out.println("Direta");
         InsercaoBinaria();
-
+        System.out.println("Binaria");
         BubbleSort();
+        System.out.println("Bolha");        
+        Heap();
+        System.out.println("Heap");
+        Shell();
+        System.out.println("Shell");
+        GnomeSort();
+        System.out.println("Gnome");
+        CombSort();
+        System.out.println("Comb");
+        ShakeSort();
+        System.out.println("Shake");
+        QuickSort();       
+        System.out.println("Quick I");
+        QuickPivo();
+        System.out.println("Quick II");        
         SelecaoDireta();
-//        Heap();
-//        Shell();
+        System.out.println("Direta");
 
 
 
 
-
-        pw.println("|\t\t\t\t\t\t\t\t\t\t\tGabriel Marioto\t|");
+        pw.println("|\tRA: 101619427 Gabriel Marioto \t\t\t| \tRA: 101730179 Bruno Mattos\t\t|");
         pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
         fw.close();
         //e assim continua para os outros métodos de ordenacao!!!
