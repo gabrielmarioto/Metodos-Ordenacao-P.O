@@ -266,6 +266,7 @@ public class Lista
                 aux = j.getInfo();
                 j.setInfo(i.getInfo());
                 i.setInfo(aux);
+                mov+=2;
             }
         }
         if (ini != i)
@@ -277,4 +278,47 @@ public class Lista
             QuickSP(j.getProx(), fim);
         }
     }
-}
+    
+    public int buscaBinaria(int chave, int tl)
+    {
+        int inicio = 0, fim = tl-1, meio = tl/2;
+        
+        No aux = getIndex(meio);
+        while(inicio < fim && aux.getInfo() != chave)
+        {
+            if(aux.getInfo() == chave)
+                return meio;
+            else if(chave > aux.getInfo())
+                inicio = meio+1;
+            else 
+                fim = meio - 1;
+            
+            meio = (inicio + fim) / 2;
+        }
+        aux = getIndex(meio);
+        if(chave > aux.getInfo())
+            return meio + 1;
+        return meio;
+    }
+    public void insercaoBinariaLista()
+    {
+        int pos, j = 0;
+        No aux = inicio.getProx(), reg1;
+        int i = 1;
+        while(aux != null)
+        {
+            pos = buscaBinaria(aux.getInfo(), i); // NUMERO E TAMANHO DO TL
+            reg1 = aux;
+            j = i;
+            while(j > pos)
+            {
+                reg1.setInfo(reg1.getAnt().getInfo());
+                reg1 = reg1.getAnt();
+                j--;
+            }
+            reg1.setInfo(aux.getInfo());
+            i++;
+            aux = aux.getProx();
+        }
+    }
+} // FIM DA CLASSE LISTA

@@ -606,6 +606,7 @@ public class Principal
     {
         // TODO code application logic here
 //        Principal p = new Principal();
+//        p.geraTabela();
         Lista l = new Lista();
         for (int i = 8; i > 0; i--)
         {
@@ -615,9 +616,11 @@ public class Principal
 //        l.selecaoDiretaLista();
 //          l.BubbleSortLista();
 //            l.ShakeSortLista();
-        l.QuickSemPivo();
+//        l.QuickSemPivo();
+        l.insercaoBinariaLista();
+
         l.exibe();
-//        p.geraTabela();
+        
     }
 
 }
