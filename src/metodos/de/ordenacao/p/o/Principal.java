@@ -253,7 +253,7 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-        
+
         pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
 
@@ -270,7 +270,7 @@ public class Principal
         movRev = auxRev.getMov();
         pw.print("|   Arquivo Reverso");
         gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
-        
+
         //Arquivo Randomico
         arqRand.seekArq(0);
         auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
@@ -299,8 +299,8 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-      
-         pw.print("|   Arquivo Ordenado");
+
+        pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
@@ -331,8 +331,9 @@ public class Principal
         pw.print("|   Arquivo Randomico");
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
-        
+
     }
+
     public void GnomeSort() throws IOException
     {
         pw.println("\n|   Gnome Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
@@ -345,8 +346,8 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-      
-         pw.print("|   Arquivo Ordenado");
+
+        pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
@@ -378,6 +379,7 @@ public class Principal
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
+
     public void CombSort() throws IOException
     {
         pw.println("\n|   Comb Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
@@ -390,8 +392,8 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-      
-         pw.print("|   Arquivo Ordenado");
+
+        pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
@@ -423,7 +425,7 @@ public class Principal
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
-    
+
     public void ShakeSort() throws IOException
     {
         pw.println("\n|   Shake Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
@@ -436,8 +438,8 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-        
-         pw.print("|   Arquivo Ordenado");
+
+        pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
@@ -469,7 +471,7 @@ public class Principal
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
-    
+
     public void QuickPivo() throws IOException
     {
         pw.println("|   Quick Pivot Sort\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
@@ -482,8 +484,8 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-        
-         pw.print("|   Arquivo Ordenado");
+
+        pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
@@ -515,7 +517,7 @@ public class Principal
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
-    
+
     public void QuickSort() throws IOException
     {
         pw.println("\n|   Quick Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
@@ -528,8 +530,8 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-        
-         pw.print("|   Arquivo Ordenado");
+
+        pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
         //Arquivo Reverso
         arqRev.seekArq(0);
@@ -561,18 +563,19 @@ public class Principal
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
+
     public void geraTabela() throws IOException
     {
         arqOrd.geraArquivoOrdenado();
         arqRev.geraArquivoReverso();
         arqRand.geraArquivoRandomico();
-        
+
         insercaoDireta();
         System.out.println("Direta");
         InsercaoBinaria();
         System.out.println("Binaria");
         BubbleSort();
-        System.out.println("Bolha");        
+        System.out.println("Bolha");
         Heap();
         System.out.println("Heap");
         Shell();
@@ -583,20 +586,17 @@ public class Principal
         System.out.println("Comb");
         ShakeSort();
         System.out.println("Shake");
-        QuickSort();       
+        QuickSort();
         System.out.println("Quick I");
         QuickPivo();
-        System.out.println("Quick II");        
+        System.out.println("Quick II");
         SelecaoDireta();
         System.out.println("Direta");
-
-
-
 
         pw.println("|\tRA: 101619427 Gabriel Marioto \t\t\t| \tRA: 101730179 Bruno Mattos\t\t|");
         pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
         fw.close();
-        //e assim continua para os outros métodos de ordenacao!!!
+
     }
 
     /**
@@ -605,8 +605,19 @@ public class Principal
     public static void main(String[] args) throws IOException
     {
         // TODO code application logic here
-        Principal p = new Principal();
-        p.geraTabela();
+//        Principal p = new Principal();
+        Lista l = new Lista();
+        for (int i = 8; i > 0; i--)
+        {
+            l.insert(i);
+        }
+//        l.InsercaoDiretaLista();
+//        l.selecaoDiretaLista();
+//          l.BubbleSortLista();
+//            l.ShakeSortLista();
+        l.QuickSemPivo();
+        l.exibe();
+//        p.geraTabela();
     }
 
 }

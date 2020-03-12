@@ -21,7 +21,7 @@ public class No
         this.prox = null;
         this.ant = null;
     }
-
+    public No(){}
     public int getInfo()
     {
         return info;
