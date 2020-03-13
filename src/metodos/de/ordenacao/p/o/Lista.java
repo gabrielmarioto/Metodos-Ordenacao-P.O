@@ -133,7 +133,17 @@ public class Lista
         }
         return aux;
     }
-
+    public void setInfoPos(int pos, int info)
+    {
+        No aux = inicio;
+        int i = 0;
+        while(i <= pos && aux != null)
+        {
+            aux = aux.getProx();
+            i++;
+        }
+        aux.setInfo(info);
+    }
     public void InsercaoDiretaLista()
     {
         No i = inicio.getProx();
@@ -304,10 +314,12 @@ public class Lista
     {
         int pos, j = 0;
         No aux = inicio.getProx(), reg1;
+        int temp;
         int i = 1;
         while(aux != null)
         {
             pos = buscaBinaria(aux.getInfo(), i); // NUMERO E TAMANHO DO TL
+            temp = aux.getInfo();
             reg1 = aux;
             j = i;
             while(j > pos)
@@ -316,7 +328,7 @@ public class Lista
                 reg1 = reg1.getAnt();
                 j--;
             }
-            reg1.setInfo(aux.getInfo());
+            reg1.setInfo(temp);
             i++;
             aux = aux.getProx();
         }
