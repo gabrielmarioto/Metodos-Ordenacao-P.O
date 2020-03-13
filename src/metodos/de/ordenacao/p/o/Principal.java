@@ -563,6 +563,52 @@ public class Principal
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
+    public void RadixSort() throws IOException
+    {
+        pw.println("\n|   Radix Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.Radix();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+
+        pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.Radix();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+       
+        
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.Radix();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
 
     public void geraTabela() throws IOException
     {
@@ -570,29 +616,30 @@ public class Principal
         arqRev.geraArquivoReverso();
         arqRand.geraArquivoRandomico();
 
-        insercaoDireta();
-        System.out.println("Direta");
-        InsercaoBinaria();
-        System.out.println("Binaria");
-        BubbleSort();
-        System.out.println("Bolha");
-        Heap();
-        System.out.println("Heap");
-        Shell();
-        System.out.println("Shell");
-        GnomeSort();
-        System.out.println("Gnome");
-        CombSort();
-        System.out.println("Comb");
-        ShakeSort();
-        System.out.println("Shake");
-        QuickSort();
-        System.out.println("Quick I");
-        QuickPivo();
-        System.out.println("Quick II");
-        SelecaoDireta();
-        System.out.println("Direta");
+//        insercaoDireta();
+//        System.out.println("Direta");
+//        InsercaoBinaria();
+//        System.out.println("Binaria");
+//        BubbleSort();
+//        System.out.println("Bolha");
+//        Heap();
+//        System.out.println("Heap");
+//        Shell();
+//        System.out.println("Shell");
+//        GnomeSort();
+//        System.out.println("Gnome");
+//        CombSort();
+//        System.out.println("Comb");
+//        ShakeSort();
+//        System.out.println("Shake");
+//        QuickSort();
+//        System.out.println("Quick I");
+//        QuickPivo();
+//        System.out.println("Quick II");
+//        SelecaoDireta();
+//        System.out.println("Direta");
 
+        RadixSort();
         pw.println("|\tRA: 101619427 Gabriel Marioto \t\t\t| \tRA: 101730179 Bruno Mattos\t\t|");
         pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
         fw.close();
@@ -605,8 +652,8 @@ public class Principal
     public static void main(String[] args) throws IOException
     {
         // TODO code application logic here
-//        Principal p = new Principal();
-//        p.geraTabela();
+        Principal p = new Principal();
+        p.geraTabela();
         Lista l = new Lista();
         for (int i = 8; i > 0; i--)
         {
@@ -617,9 +664,9 @@ public class Principal
 //          l.BubbleSortLista();
 //            l.ShakeSortLista();
 //        l.QuickSemPivo();
-        l.insercaoBinariaLista();
+//        l.insercaoBinariaLista();
 
-        l.exibe();
+//        l.exibe();
         
     }
 
