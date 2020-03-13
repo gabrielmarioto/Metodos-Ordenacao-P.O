@@ -313,16 +313,15 @@ public class Lista
     public void insercaoBinariaLista()
     {
         int pos, j = 0;
-        No aux = inicio.getProx(), reg1;
+        No reg1 = inicio.getProx();
         int temp;
         int i = 1;
-        while(aux != null)
+        while(reg1 != null)
         {
-            pos = buscaBinaria(aux.getInfo(), i); // NUMERO E TAMANHO DO TL
-            temp = aux.getInfo();
-            reg1 = aux;
+            pos = buscaBinaria(reg1.getInfo(), i); // NUMERO E TAMANHO DO TL
+            temp = reg1.getInfo();
             j = i;
-            while(j > pos)
+            while(j > pos && reg1.getAnt() != null)
             {
                 reg1.setInfo(reg1.getAnt().getInfo());
                 reg1 = reg1.getAnt();
@@ -330,7 +329,7 @@ public class Lista
             }
             reg1.setInfo(temp);
             i++;
-            aux = aux.getProx();
+            reg1 = reg1.getProx();
         }
     }
 } // FIM DA CLASSE LISTA
