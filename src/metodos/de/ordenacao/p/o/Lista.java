@@ -294,8 +294,8 @@ public class Lista
                 fim = meio - 1;
             
             meio = (inicio + fim) / 2;
+            aux = getIndex(meio);
         }
-        aux = getIndex(meio);
         if(chave > aux.getInfo())
             return meio + 1;
         return meio;
