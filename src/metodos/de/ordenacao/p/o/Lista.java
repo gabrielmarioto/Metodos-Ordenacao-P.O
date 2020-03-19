@@ -133,17 +133,19 @@ public class Lista
         }
         return aux;
     }
+
     public void setInfoPos(int pos, int info)
     {
         No aux = inicio;
         int i = 0;
-        while(i <= pos && aux != null)
+        while (i <= pos && aux != null)
         {
             aux = aux.getProx();
             i++;
         }
         aux.setInfo(info);
     }
+
     public void InsercaoDiretaLista()
     {
         No i = inicio.getProx();
@@ -276,7 +278,7 @@ public class Lista
                 aux = j.getInfo();
                 j.setInfo(i.getInfo());
                 i.setInfo(aux);
-                mov+=2;
+                mov += 2;
             }
         }
         if (ini != i)
@@ -288,40 +290,47 @@ public class Lista
             QuickSP(j.getProx(), fim);
         }
     }
-    
+
     public int buscaBinaria(int chave, int tl)
     {
-        int inicio = 0, fim = tl-1, meio = tl/2;
-        
+        int inicio = 0, fim = tl - 1, meio = tl / 2;
+
         No aux = getIndex(meio);
-        while(inicio < fim && aux.getInfo() != chave)
+        while (inicio < fim && aux.getInfo() != chave)
         {
-            if(aux.getInfo() == chave)
+            if (aux.getInfo() == chave)
+            {
                 return meio;
-            else if(chave > aux.getInfo())
-                inicio = meio+1;
-            else 
+            } else if (chave > aux.getInfo())
+            {
+                inicio = meio + 1;
+            } else
+            {
                 fim = meio - 1;
-            
+            }
+
             meio = (inicio + fim) / 2;
             aux = getIndex(meio);
         }
-        if(chave > aux.getInfo())
+        if (chave > aux.getInfo())
+        {
             return meio + 1;
+        }
         return meio;
     }
+
     public void insercaoBinariaLista()
     {
         int pos, j = 0;
         No reg1 = inicio.getProx();
         int temp;
         int i = 1;
-        while(reg1 != null)
+        while (reg1 != null)
         {
             pos = buscaBinaria(reg1.getInfo(), i); // NUMERO E TAMANHO DO TL
             temp = reg1.getInfo();
             j = i;
-            while(j > pos && reg1.getAnt() != null)
+            while (j > pos && reg1.getAnt() != null)
             {
                 reg1.setInfo(reg1.getAnt().getInfo());
                 reg1 = reg1.getAnt();
@@ -332,4 +341,59 @@ public class Lista
             reg1 = reg1.getProx();
         }
     }
+
+    public No getNo(int pos)
+    {
+        No dir = inicio;
+        int i = 0;
+        while (i < pos)
+        {
+            dir = dir.getProx();
+            i++;
+        }
+        return dir == null ? null : dir;
+    }
+
+    public void ShellLista()
+    {
+        int dist = 4, j;
+        No aux;
+        No auxD;
+        No auxK;
+        int temp;
+        int cont, k;
+
+        while (dist > 0)
+        {
+            for (int i = 0; i < dist; i++)
+            {
+                j = i;
+                while (j + dist < tl)
+                {
+                    aux = getNo(j);
+                    auxD = getNo(j + dist);                    
+                    if (aux.getInfo() < auxD.getInfo())
+                    {
+                        temp = auxD.getInfo();
+                        auxD.setInfo(aux.getInfo());
+                        aux.setInfo(temp);
+                        k = j;
+                        auxK = getNo(k - dist);
+                        
+                        while (k - dist >= i && auxD.getInfo() > auxK.getInfo())
+                        {
+                            temp = auxD.getInfo();
+                            auxD.setInfo(auxK.getInfo());
+                            auxK.setInfo(temp);
+                            k = k - dist;
+                            auxK = getNo(k - dist);
+                        }
+                    }
+                    j = j + dist;
+                }
+            }
+            dist = dist / 2;
+        }
+    }
+    
 } // FIM DA CLASSE LISTA

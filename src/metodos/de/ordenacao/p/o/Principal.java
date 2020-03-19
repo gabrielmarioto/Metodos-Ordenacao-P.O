@@ -652,13 +652,31 @@ public class Principal
     public static void main(String[] args) throws IOException
     {
         // TODO code application logic here
-        Principal p = new Principal();
-        p.geraTabela();
+//        Principal p = new Principal();
+//        p.geraTabela();
         Lista l = new Lista();
-        for (int i = 8; i > 0; i--)
-        {
-            l.insert(i);
-        }
+//        for (int i = 0; i < 8; i++)
+//        {
+//            l.insert(i);
+//        }
+        l.insert(9);
+//        l.insert(4);
+        l.insert(18);
+//        l.insert(2);
+//        l.insert(20);
+        l.insert(6);
+        l.insert(14);
+        l.insert(8);
+        l.insert(13);
+        l.insert(17);
+//        l.insert(3);
+//        l.insert(7);
+//        l.insert(1);
+        
+        
+        
+        
+        
 //        l.InsercaoDiretaLista();
 //        l.selecaoDiretaLista();
 //          l.BubbleSortLista();
@@ -666,7 +684,8 @@ public class Principal
 //        l.QuickSemPivo();
 //        l.insercaoBinariaLista();
 
-//        l.exibe();
+//        l.ShellLista();
+        l.exibe();
         
     }
 
