@@ -610,6 +610,98 @@ public class Principal
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
 
+    public void MergeSortI() throws IOException
+    {
+        pw.println("\n|   Merge Sort\t\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.MergeSortArq();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+
+        pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.MergeSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+       
+        
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.MergeSortArq();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
+    public void MergeSortII() throws IOException
+    {
+        pw.println("\n|   Merge Sort II\t|\t\t\t\t\t\t\t\t\t\t|"); // NOME METODO
+        pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+        arqOrd.initComp();
+        arqOrd.initMov();
+        tini = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        arqOrd.mergeSortArqII();
+        tfim = (int) System.currentTimeMillis(); //método para pegar a hora atual em milisegundos
+        compO = arqOrd.getComp();
+        movO = arqOrd.getMov();
+        ttotalO = tfim - tini;
+
+        pw.print("|   Arquivo Ordenado");
+        gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
+        //Arquivo Reverso
+        arqRev.seekArq(0);
+        auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
+        auxRev.initComp();
+        auxRev.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRev.mergeSortArqII();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRev = tfim - tini;
+        compRev = auxRev.getComp();
+        movRev = auxRev.getMov();
+
+        pw.print("|   Arquivo Reverso");
+        gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
+       
+        
+        //Arquivo Randomico
+        arqRand.seekArq(0);
+        auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
+        auxRand.initComp();
+        auxRand.initMov();
+        tini = (int) System.currentTimeMillis();
+        auxRand.mergeSortArqII();
+        tfim = (int) System.currentTimeMillis();
+        ttotalRand = tfim - tini;
+        compRand = auxRand.getComp();
+        movRand = auxRand.getMov();
+        pw.print("|   Arquivo Randomico");
+        gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
+        pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+    }
     public void geraTabela() throws IOException
     {
         arqOrd.geraArquivoOrdenado();
@@ -638,54 +730,51 @@ public class Principal
 //        System.out.println("Quick II");
 //        SelecaoDireta();
 //        System.out.println("Direta");
-
-        RadixSort();
+//        RadixSort();
+//        System.out.println("Radix");
+//        MergeSortI();
+//        System.out.println("Merge I");
+//        MergeSortII();
+//        System.out.println("Merge II");
         pw.println("|\tRA: 101619427 Gabriel Marioto \t\t\t| \tRA: 101730179 Bruno Mattos\t\t|");
         pw.println("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
         fw.close();
 
     }
 
+    public void geraLista(Lista l)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            l.insert(i);
+        }
+    }
+    public void MetodosLista()
+    {
+        Lista lista = new Lista();        
+        geraLista(lista);
+//        lista.InsercaoDiretaLista();
+//        lista.selecaoDiretaLista();
+//        lista.BubbleSortLista();
+//        lista.ShakeSortLista();
+//        lista.QuickSemPivo();
+//        lista.insercaoBinariaLista();
+//        lista.ShellLista();
+//        lista.QuickComPivo();
+//        lista.mergeListaI(); // ARRUMAR
+//        lista.mergeSortListaII(); // ARRUMAR
+        lista.exibe();
+
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException
     {
         // TODO code application logic here
-//        Principal p = new Principal();
+        Principal p = new Principal();
 //        p.geraTabela();
-        Lista l = new Lista();
-//        for (int i = 0; i < 8; i++)
-//        {
-//            l.insert(i);
-//        }
-        l.insert(9);
-//        l.insert(4);
-        l.insert(18);
-//        l.insert(2);
-//        l.insert(20);
-        l.insert(6);
-        l.insert(14);
-        l.insert(8);
-        l.insert(13);
-        l.insert(17);
-//        l.insert(3);
-//        l.insert(7);
-//        l.insert(1);
-        
-        
-        
-        
-        
-//        l.InsercaoDiretaLista();
-//        l.selecaoDiretaLista();
-//          l.BubbleSortLista();
-//            l.ShakeSortLista();
-//        l.QuickSemPivo();
-//        l.insercaoBinariaLista();
-
-//        l.ShellLista();
-        l.exibe();
+        p.MetodosLista();
         
     }
 

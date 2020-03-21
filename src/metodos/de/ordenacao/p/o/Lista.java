@@ -265,13 +265,17 @@ public class Lista
 
         while (i != j)
         {
+            comp++;
             while (i != j && i.getInfo() <= j.getInfo())
             {
                 i = i.getProx();
+                comp++;
             }
+            comp++;
             while (i != j && j.getInfo() >= i.getInfo())
             {
                 j = j.getAnt();
+                comp++;
             }
             if (i != j)
             {
@@ -289,6 +293,60 @@ public class Lista
         {
             QuickSP(j.getProx(), fim);
         }
+    }
+
+    public void QuickComPivo()
+    {
+        QuickCP(0, tl - 1);
+    }
+
+    public int getPos(No aux)
+    {
+        int i = 0;
+        No temp = inicio;
+        while(temp != null && aux != null && temp.getInfo() != aux.getInfo())
+        {
+            i++;
+            temp = temp.getProx();
+        }
+        
+        return i;
+    }
+    public void QuickCP(int ini, int fim)
+    {
+        No i = getIndex(ini);
+        No j = getIndex(fim);
+        No pivo = getIndex((ini + fim) / 2);
+        int aux;
+
+        while (getPos(i) < getPos(j))
+        {
+            comp++;
+            while (i.getInfo() < pivo.getInfo())
+            {
+                i = i.getProx();
+                comp++;
+            }
+            while (j.getInfo() > pivo.getInfo())
+            {                
+                j = j.getAnt();
+                comp++;
+            }
+
+            if (getPos(i) <= getPos(j))
+            {
+                aux = j.getInfo();
+                j.setInfo(i.getInfo());
+                i.setInfo(aux);
+                mov += 2;
+                i = i.getProx();
+                j = j.getAnt();
+            }
+        }
+        if(ini < getPos(j))
+            QuickCP(ini, getPos(j));
+        if(getPos(i) < fim)
+            QuickCP(getPos(i), fim);
     }
 
     public int buscaBinaria(int chave, int tl)
@@ -371,7 +429,7 @@ public class Lista
                 while (j + dist < tl)
                 {
                     aux = getNo(j);
-                    auxD = getNo(j + dist);                    
+                    auxD = getNo(j + dist);
                     if (aux.getInfo() < auxD.getInfo())
                     {
                         temp = auxD.getInfo();
@@ -379,7 +437,7 @@ public class Lista
                         aux.setInfo(temp);
                         k = j;
                         auxK = getNo(k - dist);
-                        
+
                         while (k - dist >= i && auxD.getInfo() > auxK.getInfo())
                         {
                             temp = auxD.getInfo();
@@ -395,5 +453,156 @@ public class Lista
             dist = dist / 2;
         }
     }
-    
+    public void setInfoPos(int pos, int num, No l)
+    {
+        int i = 0;
+        while(l != null && i != pos)
+        {
+            l = l.getProx();
+            i++;
+        }
+        l.setInfo(num);
+    }
+
+    public int getInfoPos(int num)
+    {
+        int i = 0;
+        No aux = inicio;
+        while( aux != null && i != num)
+        {
+            aux = aux.getProx();
+            i++;
+        }
+        return aux.getInfo();
+    }
+    public void fusaoMerge(Lista l1, Lista l2, int seq)
+    {
+        int i = 0, j = 0, k = 0, auxSeq = seq;
+        No lista1 = l1.getInicio();
+        No lista2 = l2.getInicio();
+        No aux = inicio;
+        
+        while(k < tl)
+        {
+            while(aux != null && i < seq && j < seq)
+            {
+                if(lista1.getInfo() < lista2.getInfo())
+                {
+                    aux.setInfo(lista1.getInfo());
+                    lista1 = lista1.getProx();
+                    i++;
+                }
+                else
+                {
+                    aux.setInfo(lista2.getInfo());
+                    lista2 = lista2.getProx();
+                    j++;
+                }
+                aux = aux.getProx();
+                k++;
+            }
+            while(aux != null && i < seq)
+            {
+                aux.setInfo(lista1.getInfo());
+                lista1 = lista1.getProx();
+                aux = aux.getProx();
+                i++;                
+                k++;
+            }
+            while(aux != null && j < seq)
+            {
+                aux.setInfo(lista2.getInfo());
+                lista2 = lista2.getProx();
+                aux = aux.getProx();
+                j++;                
+                k++;
+            }
+            seq += auxSeq;
+        }
+    }
+    public void particaoLista(Lista l1, Lista l2)
+    {
+        No principal = inicio;
+        for (int i = 0, j = tl / 2; i < tl /2 ; i++, j++)
+        {
+            l1.insert(principal.getInfo());
+            l2.insert(getInfoPos(j));
+            principal = principal.getProx();
+        }
+    }
+    public void mergeListaI()
+    {
+        int seq = 1;
+        Lista l1 = new Lista();
+        Lista l2 = new Lista();
+        
+        while(seq <= tl / 2)
+        {
+            particaoLista(l1, l2);
+            fusaoMerge(l1, l2, seq);
+            seq *= 2;
+        }
+    }
+    public void mergeSortListaII()
+    {
+        Lista list = new Lista();
+        mergeListaRecursivo(list, 0, tl-1);        
+    }
+    public void mergeListaRecursivo(Lista l1, int esq, int dir)
+    {
+        int meio;
+        if(esq < dir)
+        {
+            meio = (esq + dir) / 2;
+            mergeListaRecursivo(l1, esq, meio);
+            mergeListaRecursivo(l1, meio+1, dir);
+            fusaoMergeLista(l1, esq, meio, meio+1, dir);
+        }
+    }
+    public void fusaoMergeLista(Lista l1, int ini1, int fim1, int ini2, int fim2)
+    {
+        int i = ini1, j = ini2, k = 0;
+        No aux1 = getNo(i);
+        No aux2 = getNo(j);
+        No principal = inicio;
+        No lista;
+        while(i <= fim1 && j <=fim2)
+        {
+            if(aux1.getInfo() < aux2.getInfo())
+            {
+                l1.insert(aux1.getInfo());
+                i++;
+                mov++;
+                aux1 = aux1.getProx();
+            }
+            else
+            {
+                l1.insert(aux2.getInfo());
+                j++;
+                mov++;
+                aux2 = aux2.getProx();
+            }
+            k++;
+        }
+        while(i <= fim1)
+        {
+            l1.insert(aux1.getInfo());
+            i++;
+            aux1 = aux1.getProx();
+            mov++;
+        }
+        while(j <= fim2)
+        {
+            l1.insert(aux2.getInfo());
+            j++;
+            aux2 = aux2.getProx();
+            mov++;
+        }
+        lista = l1.getInicio();
+        for ( i = 0; i < k; i++)
+        {
+            setInfoPos(i+ini1, lista.getInfo(), principal);
+            lista = lista.getProx();
+        }
+    }
 } // FIM DA CLASSE LISTA

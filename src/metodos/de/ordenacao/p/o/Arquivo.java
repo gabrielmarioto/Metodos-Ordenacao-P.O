@@ -736,5 +736,155 @@ public class Arquivo
             QuickSPArq(j + 1, fim);
         }
     }
+    public void particaoMerge(Arquivo arq1, Arquivo arq2, int tl)
+    {
+        Registro reg1 = new Registro();
+        for (int i = 0 , j = tl/2; i < tl /2 ; i++, j++)
+        {
+            seekArq(i);
+            reg1.leDoArq(arquivo);
+            reg1.gravaNoArq(arq1.getFile());
+            
+            seekArq(j);
+            reg1.leDoArq(arquivo);
+            reg1.gravaNoArq(arq2.getFile());
+        }
+    }
 
+    public void fusaoMerge(Arquivo arq1, Arquivo arq2, int seq, int tl)
+    {
+        int i = 0, j = 0, k = 0, auxSeq = seq;
+        Registro reg1 = new Registro();
+        Registro reg2 = new Registro();
+        
+        while( k < tl)
+        {
+            while(i < seq && j < seq)
+            {
+                arq1.seekArq(i);
+                reg1.leDoArq(arq1.getFile());
+                arq2.seekArq(j);
+                reg2.leDoArq(arq2.getFile());
+                comp++;
+                if(reg1.getNumero() < reg2.getNumero())
+                {
+                    seekArq(k);
+                    reg1.gravaNoArq(arquivo);
+                    i++;
+                    mov++;
+                }
+                else
+                {
+                    seekArq(k);
+                    reg2.gravaNoArq(arquivo);
+                    j++;
+                    mov++;
+                }
+                k++;
+            }
+            while(i < seq)
+            {
+                seekArq(k);
+                reg1.gravaNoArq(arquivo);
+                k++;
+                i++;
+                mov++;
+            }
+            while(j < seq)
+            {
+                seekArq(k);
+                reg2.gravaNoArq(arquivo);
+                k++;
+                j++;     
+                mov++;
+            }
+            seq += auxSeq;
+        }        
+    }
+    public void MergeSortArq() throws IOException
+    {
+        int seq = 1;
+        Arquivo arq1 = new Arquivo("arq1.dat");
+        Arquivo arq2 = new Arquivo("arq2.dat");
+        int tl = (int) filesize();
+        
+        while( seq <= tl / 2)
+        {
+            particaoMerge(arq1, arq2, tl);
+            fusaoMerge(arq1, arq2, seq, tl);
+            seq *= 2;
+        }
+        
+    }
+    public void mergeSortArqII() throws IOException
+    {
+        Arquivo arq1 = new Arquivo("merge2.dat");
+        int tl = (int) filesize();
+        mergeArqRecursivo(arq1, 0, tl-1);
+    }
+    public void mergeArqRecursivo(Arquivo arq1, int esq, int dir)
+    {
+        int meio;
+        if(esq < dir)
+        {
+            meio = (esq+dir) / 2;
+            mergeArqRecursivo(arq1, esq, meio);
+            mergeArqRecursivo(arq1, meio+1, dir);
+            fusaoMergeArq(arq1, esq, meio, meio+1, dir);
+        }
+    }
+    public void fusaoMergeArq(Arquivo arq, int ini1, int fim1, int ini2, int fim2)
+    {
+        int i = ini1, j = ini2, k = 0;
+        Registro reg1 = new Registro();
+        Registro reg2 = new Registro();
+        while(i <= fim1 && j <= fim2)
+        {
+            seekArq(i);
+            reg1.leDoArq(arquivo);
+            seekArq(j);
+            reg2.leDoArq(arquivo);
+            comp++;
+            if(reg1.getNumero() < reg2.getNumero())
+            {
+                arq.seekArq(k);
+                reg1.gravaNoArq(arq.getFile());
+                i++;
+                mov++;
+            }
+            else
+            {
+                arq.seekArq(k);
+                reg2.gravaNoArq(arq.getFile());
+                j++;
+                mov++;
+            }
+            k++;
+        }
+        while(i <= fim1)
+        {
+            arq.seekArq(k);
+            reg1.gravaNoArq(arq.getFile());
+            i++;
+            k++;
+            mov++;
+        }
+        while(j <= fim2)
+        {
+            arq.seekArq(k);
+            reg2.gravaNoArq(arq.getFile());
+            j++;
+            k++;
+            mov++;
+        }
+        
+        for (i = 0; i < k; i++)
+        {
+            arq.seekArq(i);
+            reg1.leDoArq(arq.getFile());
+            seekArq(i+ini1);
+            reg1.gravaNoArq(arquivo);
+            mov+=2;
+        }
+    }
 } // FIM DA CLASSE
