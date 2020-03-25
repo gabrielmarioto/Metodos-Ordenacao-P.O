@@ -886,4 +886,117 @@ public class Arquivo
             mov+=2;
         }
     }
+    
+    public void CountingSort() throws IOException
+    {
+        
+        Registro reg1 = new Registro();
+        int maior = getMax();        
+        int[] aux = new int[10];
+        int tl = (int) filesize();
+        
+        seekArq(0);
+        for (int i = 0; i < tl; i++)
+        {
+            reg1.leDoArq(arquivo);
+            aux[reg1.getNumero()]++;
+        }       
+        for (int i = 0, j = 0; j <= maior; j++)
+        {
+            for (int k = aux[j]; k > 0; k--)
+            {
+                seekArq(i);
+                reg1.setNumero(j);
+                reg1.gravaNoArq(arquivo);
+                i++;
+            }
+        }       
+
+    }
+    public int getQuantidade()
+    {
+        Registro reg1 = new Registro();
+        int i = 0;
+        seekArq(i);
+        while(!eof())
+        {
+            reg1.leDoArq(arquivo);
+            i++;
+        }
+        return i;
+    }
+    
+    public void BucketSort() throws IOException
+    {
+        int n = getQuantidade();
+        int tl = (int) filesize();
+        Registro reg1 = new Registro();
+        Lista[] baldes = new Lista[n];
+        No aux;
+        for (int i = 0; i < n; i++) // INSTANCIANDO OS BALDES
+        {
+            baldes[i] = new Lista();
+        }
+        seekArq(0);
+        for (int i = 0; i < tl; i++) // INSERE OS ELEMENTOS NO BALDE
+        {
+            reg1.leDoArq(arquivo);
+            baldes[reg1.getNumero() / n].insert(reg1.getNumero());
+        }
+        for (int i = 0; i < baldes.length; i++)
+        {
+            Heap(baldes[i]);
+        }
+        for (int i = 0, k = 0; i < baldes.length; i++)
+        {
+            aux = baldes[i].getInicio();
+            while(aux != null)
+            {
+                reg1.setNumero(aux.getInfo());
+                seekArq(k++);
+                reg1.gravaNoArq(arquivo);
+                aux = aux.getProx();
+                mov++;
+            }
+        }
+    }
+    
+    public void Heap(Lista l)
+    {
+        int tl2 = l.getTl();
+        int pai, fe, fd;
+        No nfe, nfd, npai, nMaiorF;
+        while (tl2 > 1)
+        {
+            pai = tl2 / 2 - 1;
+            while (pai >= 0)
+            {
+                npai = l.getIndex(pai);
+                fe = 2 * pai + 1;
+                fd = fe + 1;
+                if (fd < tl2)
+                {
+                    nfd = l.getIndex(fd);                  
+                    nfe = l.getIndex(fe);
+                    
+                    nMaiorF = (nfe.getInfo() > nfd.getInfo()) ? nfe : nfd;
+                } else
+                {
+                    nMaiorF = l.getIndex(fe);
+                }
+                comp++;
+                if (nMaiorF.getInfo() > npai.getInfo())
+                {
+                    int aux = nMaiorF.getInfo();
+                    nMaiorF.setInfo(npai.getInfo());
+                    npai.setInfo(aux);
+                }
+                pai--;
+            }
+            int aux = l.getIndex(0).getInfo();
+            l.getIndex(0).setInfo(l.getIndex(tl2 - 1).getInfo());
+            l.getIndex(tl2 - 1).setInfo(aux);
+            tl2--;
+        }
+    }
 } // FIM DA CLASSE
