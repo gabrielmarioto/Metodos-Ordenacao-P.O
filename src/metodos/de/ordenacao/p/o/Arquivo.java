@@ -259,25 +259,23 @@ public class Arquivo
 
     public void Count(int maior, int exp) throws IOException
     {
-
         Registro reg1 = new Registro();
         int[] count = new int[10];
         int[] aux = new int[maior + 1];
         int tl = (int) filesize();
+        seekArq(0);
         for (int i = 0; i < tl; i++)
-        {
-            seekArq(i);
+        {            
             reg1.leDoArq(arquivo);
             count[(reg1.getNumero() / exp) % 10]++;
         }
-        for (int i = 1; i < tl; i++)
+        for (int i = 1; i < 10; i++)
         {
             count[i] += count[i - 1];
         }
-
+        seekArq(0);
         for (int i = 0; i < tl; i++)
-        {
-            seekArq(i);
+        {            
             reg1.leDoArq(arquivo);
             aux[count[(reg1.getNumero() / exp) % 10] - 1] = reg1.getNumero();
             count[(reg1.getNumero() / exp) % 10]--;
@@ -288,6 +286,7 @@ public class Arquivo
             seekArq(i);
             reg1.setNumero(aux[i]);
             reg1.gravaNoArq(arquivo);
+            mov++;
         }
 
     }

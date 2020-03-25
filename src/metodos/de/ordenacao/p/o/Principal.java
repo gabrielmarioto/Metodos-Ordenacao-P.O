@@ -575,10 +575,10 @@ public class Principal
         compO = arqOrd.getComp();
         movO = arqOrd.getMov();
         ttotalO = tfim - tini;
-
+        
         pw.print("|   Arquivo Ordenado");
         gravaLinha(compO, 0, movO, 0, ttotalO);//tempo execução no Arquivo Ordenado já convertido para segundos
-        //Arquivo Reverso
+        //Arquivo Reverso        
         arqRev.seekArq(0);
         auxRev.copiaArquivo(arqRev.getFile()); //faz uma cópia do arquivo de arqRev para preservar o original
         auxRev.initComp();
@@ -588,8 +588,7 @@ public class Principal
         tfim = (int) System.currentTimeMillis();
         ttotalRev = tfim - tini;
         compRev = auxRev.getComp();
-        movRev = auxRev.getMov();
-
+        movRev = auxRev.getMov();        
         pw.print("|   Arquivo Reverso");
         gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
        
@@ -605,7 +604,7 @@ public class Principal
         ttotalRand = tfim - tini;
         compRand = auxRand.getComp();
         movRand = auxRand.getMov();
-        pw.print("|   Arquivo Randomico");
+        pw.print("|   Arquivo Randomico");     
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
     }
