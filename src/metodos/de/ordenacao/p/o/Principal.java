@@ -501,7 +501,7 @@ public class Principal
 
         pw.print("|   Arquivo Reverso");
         gravaLinha(compRev, 0, movRev, 0, ttotalRev);//tempo execução no Arquivo Reverso já convertido para segundos
-
+        
         //Arquivo Randomico
         arqRand.seekArq(0);
         auxRand.copiaArquivo(arqRand.getFile()); //faz uma cópia do arquivo de arqRand para preservar o original
@@ -516,6 +516,7 @@ public class Principal
         pw.print("|   Arquivo Randomico");
         gravaLinha(compRand, 0, movRand, 0, ttotalRand);//tempo execução no Arquivo Randomico já convertido para segundos   
         pw.print("+-----------------------+---------------+---------------+---------------+---------------+---------------+");
+
     }
 
     public void QuickSort() throws IOException
@@ -797,39 +798,38 @@ public class Principal
         arqRev.geraArquivoReverso();
         arqRand.geraArquivoRandomico();
 
-//        insercaoDireta();
-//        System.out.println("Direta");
-//        InsercaoBinaria();
-//        System.out.println("Binaria");
-//        BubbleSort();
-//        System.out.println("Bolha");
-//        Heap();
-//        System.out.println("Heap");
-//        Shell();
-//        System.out.println("Shell");
-//        GnomeSort();
-//        System.out.println("Gnome");
-//        CombSort();
-//        System.out.println("Comb");
-//        ShakeSort();
-//        System.out.println("Shake");
-//        QuickSort();
-//        System.out.println("Quick I");
-//        QuickPivo();
-//        System.out.println("Quick II");       
-//        RadixSort();
-//        System.out.println("Radix");
-//        MergeSortI();
-//        System.out.println("Merge I");
-//        MergeSortII();
-//        System.out.println("Merge II");
-//        CountingSort();
-//        System.out.println("Counting Sort");
-//        BucketSort();
-//        System.out.println("Bucket Sort");
-
-//        SelecaoDireta();
-//        System.out.println("Direta");
+        insercaoDireta();
+        System.out.println("Direta");
+        InsercaoBinaria();
+        System.out.println("Binaria");
+        BubbleSort();
+        System.out.println("Bolha");
+        Heap();
+        System.out.println("Heap");
+        Shell();
+        System.out.println("Shell");
+        GnomeSort();
+        System.out.println("Gnome");
+        CombSort();
+        System.out.println("Comb");
+        ShakeSort();
+        System.out.println("Shake");
+        QuickSort();
+        System.out.println("Quick I");
+        QuickPivo();
+        System.out.println("Quick II");       
+        RadixSort();
+        System.out.println("Radix");
+        MergeSortI();
+        System.out.println("Merge I");
+        MergeSortII();
+        System.out.println("Merge II");
+        CountingSort();
+        System.out.println("Counting Sort");
+        BucketSort();
+        System.out.println("Bucket Sort");
+        SelecaoDireta();
+        System.out.println("Direta");
 
 
 //        System.out.println("Ordenado: "+arqOrd.toString());

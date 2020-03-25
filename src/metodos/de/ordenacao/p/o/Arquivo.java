@@ -265,7 +265,7 @@ public class Arquivo
         int tl = (int) filesize();
         seekArq(0);
         for (int i = 0; i < tl; i++)
-        {            
+        {
             reg1.leDoArq(arquivo);
             count[(reg1.getNumero() / exp) % 10]++;
         }
@@ -275,7 +275,7 @@ public class Arquivo
         }
         seekArq(0);
         for (int i = 0; i < tl; i++)
-        {            
+        {
             reg1.leDoArq(arquivo);
             aux[count[(reg1.getNumero() / exp) % 10] - 1] = reg1.getNumero();
             count[(reg1.getNumero() / exp) % 10]--;
@@ -638,7 +638,7 @@ public class Arquivo
             comp++;
             seekArq(i);
             reg1.leDoArq(arquivo);
-            while (i < fim && reg1.getNumero() < pivo.getNumero())
+            while (reg1.getNumero() < pivo.getNumero())
             {
                 i++;
                 seekArq(i);
@@ -648,7 +648,7 @@ public class Arquivo
             comp++;
             seekArq(j);
             reg2.leDoArq(arquivo);
-            while (j > ini && reg2.getNumero() > pivo.getNumero())
+            while (reg2.getNumero() > pivo.getNumero())
             {
                 j--;
                 seekArq(j);
@@ -663,15 +663,17 @@ public class Arquivo
                 seekArq(j);
                 reg1.gravaNoArq(arquivo);
                 mov += 2;
+                i++;
+                j--;
             }
         }
-        if (ini < i - 1)
+        if (ini < j)
         {
-            QuickCPArq(ini, i - 1);
+            QuickCPArq(ini, j);
         }
-        if (j + 1 < fim)
+        if (i < fim)
         {
-            QuickCPArq(j + 1, fim);
+            QuickCPArq(i, fim);
         }
     }
 
@@ -735,15 +737,16 @@ public class Arquivo
             QuickSPArq(j + 1, fim);
         }
     }
+
     public void particaoMerge(Arquivo arq1, Arquivo arq2, int tl)
     {
         Registro reg1 = new Registro();
-        for (int i = 0 , j = tl/2; i < tl /2 ; i++, j++)
+        for (int i = 0, j = tl / 2; i < tl / 2; i++, j++)
         {
             seekArq(i);
             reg1.leDoArq(arquivo);
             reg1.gravaNoArq(arq1.getFile());
-            
+
             seekArq(j);
             reg1.leDoArq(arquivo);
             reg1.gravaNoArq(arq2.getFile());
@@ -755,24 +758,23 @@ public class Arquivo
         int i = 0, j = 0, k = 0, auxSeq = seq;
         Registro reg1 = new Registro();
         Registro reg2 = new Registro();
-        
-        while( k < tl)
+
+        while (k < tl)
         {
-            while(i < seq && j < seq)
+            while (i < seq && j < seq)
             {
                 arq1.seekArq(i);
                 reg1.leDoArq(arq1.getFile());
                 arq2.seekArq(j);
                 reg2.leDoArq(arq2.getFile());
                 comp++;
-                if(reg1.getNumero() < reg2.getNumero())
+                if (reg1.getNumero() < reg2.getNumero())
                 {
                     seekArq(k);
                     reg1.gravaNoArq(arquivo);
                     i++;
                     mov++;
-                }
-                else
+                } else
                 {
                     seekArq(k);
                     reg2.gravaNoArq(arquivo);
@@ -781,7 +783,7 @@ public class Arquivo
                 }
                 k++;
             }
-            while(i < seq)
+            while (i < seq)
             {
                 seekArq(k);
                 reg1.gravaNoArq(arquivo);
@@ -789,69 +791,72 @@ public class Arquivo
                 i++;
                 mov++;
             }
-            while(j < seq)
+            while (j < seq)
             {
                 seekArq(k);
                 reg2.gravaNoArq(arquivo);
                 k++;
-                j++;     
+                j++;
                 mov++;
             }
             seq += auxSeq;
-        }        
+        }
     }
+
     public void MergeSortArq() throws IOException
     {
         int seq = 1;
         Arquivo arq1 = new Arquivo("arq1.dat");
         Arquivo arq2 = new Arquivo("arq2.dat");
         int tl = (int) filesize();
-        
-        while( seq <= tl / 2)
+
+        while (seq <= tl / 2)
         {
             particaoMerge(arq1, arq2, tl);
             fusaoMerge(arq1, arq2, seq, tl);
             seq *= 2;
         }
-        
+
     }
+
     public void mergeSortArqII() throws IOException
     {
         Arquivo arq1 = new Arquivo("merge2.dat");
         int tl = (int) filesize();
-        mergeArqRecursivo(arq1, 0, tl-1);
+        mergeArqRecursivo(arq1, 0, tl - 1);
     }
+
     public void mergeArqRecursivo(Arquivo arq1, int esq, int dir)
     {
         int meio;
-        if(esq < dir)
+        if (esq < dir)
         {
-            meio = (esq+dir) / 2;
+            meio = (esq + dir) / 2;
             mergeArqRecursivo(arq1, esq, meio);
-            mergeArqRecursivo(arq1, meio+1, dir);
-            fusaoMergeArq(arq1, esq, meio, meio+1, dir);
+            mergeArqRecursivo(arq1, meio + 1, dir);
+            fusaoMergeArq(arq1, esq, meio, meio + 1, dir);
         }
     }
+
     public void fusaoMergeArq(Arquivo arq, int ini1, int fim1, int ini2, int fim2)
     {
         int i = ini1, j = ini2, k = 0;
         Registro reg1 = new Registro();
         Registro reg2 = new Registro();
-        while(i <= fim1 && j <= fim2)
+        while (i <= fim1 && j <= fim2)
         {
             seekArq(i);
             reg1.leDoArq(arquivo);
             seekArq(j);
             reg2.leDoArq(arquivo);
             comp++;
-            if(reg1.getNumero() < reg2.getNumero())
+            if (reg1.getNumero() < reg2.getNumero())
             {
                 arq.seekArq(k);
                 reg1.gravaNoArq(arq.getFile());
                 i++;
                 mov++;
-            }
-            else
+            } else
             {
                 arq.seekArq(k);
                 reg2.gravaNoArq(arq.getFile());
@@ -860,7 +865,7 @@ public class Arquivo
             }
             k++;
         }
-        while(i <= fim1)
+        while (i <= fim1)
         {
             arq.seekArq(k);
             reg1.gravaNoArq(arq.getFile());
@@ -868,7 +873,7 @@ public class Arquivo
             k++;
             mov++;
         }
-        while(j <= fim2)
+        while (j <= fim2)
         {
             arq.seekArq(k);
             reg2.gravaNoArq(arq.getFile());
@@ -876,31 +881,31 @@ public class Arquivo
             k++;
             mov++;
         }
-        
+
         for (i = 0; i < k; i++)
         {
             arq.seekArq(i);
             reg1.leDoArq(arq.getFile());
-            seekArq(i+ini1);
+            seekArq(i + ini1);
             reg1.gravaNoArq(arquivo);
-            mov+=2;
+            mov += 2;
         }
     }
-    
+
     public void CountingSort() throws IOException
     {
-        
+
         Registro reg1 = new Registro();
-        int maior = getMax();        
+        int maior = getMax();
         int[] aux = new int[10];
         int tl = (int) filesize();
-        
+
         seekArq(0);
         for (int i = 0; i < tl; i++)
         {
             reg1.leDoArq(arquivo);
             aux[reg1.getNumero()]++;
-        }       
+        }
         for (int i = 0, j = 0; j <= maior; j++)
         {
             for (int k = aux[j]; k > 0; k--)
@@ -910,22 +915,23 @@ public class Arquivo
                 reg1.gravaNoArq(arquivo);
                 i++;
             }
-        }       
+        }
 
     }
+
     public int getQuantidade()
     {
         Registro reg1 = new Registro();
         int i = 0;
         seekArq(i);
-        while(!eof())
+        while (!eof())
         {
             reg1.leDoArq(arquivo);
             i++;
         }
         return i;
     }
-    
+
     public void BucketSort() throws IOException
     {
         int n = getQuantidade();
@@ -950,7 +956,7 @@ public class Arquivo
         for (int i = 0, k = 0; i < baldes.length; i++)
         {
             aux = baldes[i].getInicio();
-            while(aux != null)
+            while (aux != null)
             {
                 reg1.setNumero(aux.getInfo());
                 seekArq(k++);
@@ -960,7 +966,7 @@ public class Arquivo
             }
         }
     }
-    
+
     public void Heap(Lista l)
     {
         int tl2 = l.getTl();
@@ -976,9 +982,9 @@ public class Arquivo
                 fd = fe + 1;
                 if (fd < tl2)
                 {
-                    nfd = l.getIndex(fd);                  
+                    nfd = l.getIndex(fd);
                     nfe = l.getIndex(fe);
-                    
+
                     nMaiorF = (nfe.getInfo() > nfd.getInfo()) ? nfe : nfd;
                 } else
                 {
