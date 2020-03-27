@@ -967,7 +967,7 @@ public class Arquivo
         }
     }
 
-    public void Heap(Lista l)
+    public void Heap(Lista l) // BUCKET
     {
         int tl2 = l.getTl();
         int pai, fe, fd;
@@ -1003,6 +1003,68 @@ public class Arquivo
             l.getIndex(0).setInfo(l.getIndex(tl2 - 1).getInfo());
             l.getIndex(tl2 - 1).setInfo(aux);
             tl2--;
+        }
+    }
+    
+    public void TimSort() throws IOException
+    {
+        int RUN = 32, tl = (int) filesize();
+        for (int i = 0; i < tl; i += RUN)
+        {
+            if(i + (RUN-1) > tl - 1)
+            {
+                insertionSortTim(i, tl);
+            }
+            else
+                insertionSortTim(i, RUN);
+        }
+        for (int size = RUN; size < tl; size *= 2)
+        {
+            for (int esq = 0; esq < tl; esq += 2*size)
+            {
+                int meio = esq + size + 1;
+                int dir = esq+2*size - 1 > tl-1? tl-1 : esq+2*size - 1;
+                
+                mergeSortTim(esq, meio, dir);
+            }
+            
+        }
+    }
+    
+    public void insertionSortTim(int left, int right) // TIM SORT
+    {
+        Registro reg1 = new Registro();
+        Registro reg2 = new Registro();
+        
+        for (int i = left+1; i < right; i++)
+        {
+            seekArq(i);
+            reg1.leDoArq(arquivo);
+            seekArq(i - 1);
+            reg2.leDoArq(arquivo);
+            comp++;
+            for (int j = i - 1; j >= 0 && reg2.getNumero() > reg1.getNumero(); j--)
+            {
+                seekArq(j);
+                reg1.gravaNoArq(arquivo);
+                reg2.gravaNoArq(arquivo);
+                seekArq(j - 1);
+                reg2.leDoArq(arquivo);
+                reg1.leDoArq(arquivo);
+                comp++;
+                mov+=2;
+            }
+        }
+    }
+    
+    public void mergeSortTim(int esq, int meio, int dir)
+    {
+        Arquivo aux = new Arquivo("timsort.dat");
+        if(esq < dir)
+        {
+            mergeArqRecursivo(aux, esq, meio);
+            mergeArqRecursivo(aux, meio+1, dir);
+            fusaoMergeArq(aux, esq, meio, meio+1, dir);
         }
     }
 } // FIM DA CLASSE

@@ -85,6 +85,54 @@ public class Lista
         return aux;
     }
 
+     private void insereNo(No novo)
+    {
+        if(inicio == null)
+        {
+            inicio = novo;
+            fim = inicio;
+        }
+        else
+        {
+            No aux = inicio;
+            while(aux.getProx() != null)
+                aux = aux.getProx();
+            
+            novo.setAnt(aux);
+            aux.setProx(novo);
+            fim = novo;
+        }
+    }      
+     
+    public void geraListaOrdenada()
+    {        
+        for (int i = 0; i < 10; i++)
+        {
+            No aux = new No(i);
+            insereNo(aux);
+        }
+    }
+    public void geraListaReversa()
+    {
+        for (int i = 9; i >= 0; i--)
+        {
+            No aux = new No(i);
+            insereNo(aux);
+        }
+    }
+    public void geraListaRandomica()
+    {        
+        insereNo(new No(6));
+        insereNo(new No(7));
+        insereNo(new No(1));
+        insereNo(new No(4));
+        insereNo(new No(3));
+        insereNo(new No(8));
+        insereNo(new No(9));
+        insereNo(new No(5));
+        insereNo(new No(2));  
+        insereNo(new No(0));
+    }
     public void insert(int info)
     {
         No aux = inicio;
@@ -604,5 +652,83 @@ public class Lista
             setInfoPos(i+ini1, lista.getInfo(), principal);
             lista = lista.getProx();
         }
+    }
+    
+    
+    
+    public void heap()
+    {
+        int n, tl = 0;
+        No pai, fd, fe, fmaior, fim = inicio;
+        
+        while(fim.getProx() != null)
+        {
+            fim = fim.getProx();
+            tl++;
+        }
+        tl ++;
+        
+        while(fim != inicio)
+        {
+            for(n = tl / 2 - 1; n >= 0; n--)
+            {
+                if(n == 0)
+                    pai = inicio;
+                else                    
+                    pai = localizaNo(inicio, n);
+                fe = localizaNo(inicio, n + n + 1);
+                fd = localizaNo(fe, 1);
+
+                fmaior = fe;
+
+                if(n + n + 2 < tl && fd.getInfo()> fe.getInfo())
+                    fmaior = fd;
+
+                if(fmaior.getInfo() > pai.getInfo())
+                    permutacao(pai, fmaior);
+            }
+            
+            permutacao(inicio, fim);
+            
+            tl--;
+            fim = fim.getAnt();
+        }
+    }
+    
+    
+    
+    
+    private No localizaNo(No no, int qntd)
+    {
+        if(qntd == 0) //Posicionar no fim da lista
+        {
+            while(no.getProx() != null)
+                no = no.getProx();
+        }
+        else
+        {
+           while(qntd != 0 && no != null)
+            {
+                if(qntd > 0)
+                {
+                    no = no.getProx();
+                    qntd--;
+                }
+                else
+                {
+                    no = no.getAnt();
+                    qntd++;
+                }
+            } 
+        }
+        return no;
+    }
+    
+    private void permutacao(No no1, No no2)
+    {
+        No aux = new No(no1.getInfo());
+        
+        no1.setInfo(no2.getInfo());
+        no2.setInfo(aux.getInfo());
     }
 } // FIM DA CLASSE LISTA
