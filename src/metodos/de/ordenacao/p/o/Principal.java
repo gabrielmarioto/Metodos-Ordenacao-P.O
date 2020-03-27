@@ -915,31 +915,31 @@ public class Principal
 //        lOrd.InsercaoDiretaLista();
 //        lRand.InsercaoDiretaLista();
 //        lRev.InsercaoDiretaLista();
-
+//
 //        lOrd.selecaoDiretaLista();
 //        lRand.selecaoDiretaLista();
 //        lRev.selecaoDiretaLista();      
-        
+//        
 //        lOrd.BubbleSortLista();
 //        lRand.BubbleSortLista();
 //        lRev.BubbleSortLista();      
-        
+//        
 //        lOrd.ShakeSortLista();
 //        lRand.ShakeSortLista();
 //        lRev.ShakeSortLista();
-         
+//         
 //        lOrd.QuickSemPivo();
 //        lRand.QuickSemPivo();
 //        lRev.QuickSemPivo();
-             
+//             
 //        lOrd.insercaoBinariaLista();
 //        lRand.insercaoBinariaLista();
 //        lRev.insercaoBinariaLista();           
-        
+//        
 //        lOrd.ShellLista();
 //        lRand.ShellLista();
 //        lRev.ShellLista();        
-        
+//        
 //        lOrd.QuickComPivo();
 //        lRand.QuickComPivo();
 //        lRev.QuickComPivo();
@@ -951,10 +951,26 @@ public class Principal
 //        lOrd.mergeSortListaII();
 //        lRand.mergeSortListaII();
 //        lRev.mergeSortListaII();
-
+//
 //        lOrd.heap();
 //        lRand.heap();
 //        lRev.heap();
+//
+//        lOrd.radixSort();
+//        lRand.radixSort();
+//        lRev.radixSort();
+//        
+//        lOrd.bucketSort();
+//        lRand.bucketSort();
+//        lRev.bucketSort();
+//        
+//        lOrd.combSort();
+//        lRand.combSort();
+//        lRev.combSort();
+//        
+//        lOrd.gnomeSort();
+//        lRand.gnomeSort();
+//        lRev.gnomeSort();
     }
 
     /**

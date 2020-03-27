@@ -85,33 +85,53 @@ public class Lista
         return aux;
     }
 
-     private void insereNo(No novo)
+    public int getIndex(No no)
     {
-        if(inicio == null)
+        No aux = inicio;
+        int index = 0;
+        while (aux != null && aux != no)
+        {
+            aux = aux.getProx();
+            index++;
+        }
+        if (aux != null)
+        {
+            return index;
+        } else
+        {
+            return -1;
+        }
+    }
+
+    private void insereNo(No novo)
+    {
+        if (inicio == null)
         {
             inicio = novo;
             fim = inicio;
-        }
-        else
+        } else
         {
             No aux = inicio;
-            while(aux.getProx() != null)
+            while (aux.getProx() != null)
+            {
                 aux = aux.getProx();
-            
+            }
+
             novo.setAnt(aux);
             aux.setProx(novo);
             fim = novo;
         }
-    }      
-     
+    }
+
     public void geraListaOrdenada()
-    {        
+    {
         for (int i = 0; i < 10; i++)
         {
             No aux = new No(i);
             insereNo(aux);
         }
     }
+
     public void geraListaReversa()
     {
         for (int i = 9; i >= 0; i--)
@@ -120,8 +140,9 @@ public class Lista
             insereNo(aux);
         }
     }
+
     public void geraListaRandomica()
-    {        
+    {
         insereNo(new No(6));
         insereNo(new No(7));
         insereNo(new No(1));
@@ -130,9 +151,10 @@ public class Lista
         insereNo(new No(8));
         insereNo(new No(9));
         insereNo(new No(5));
-        insereNo(new No(2));  
+        insereNo(new No(2));
         insereNo(new No(0));
     }
+
     public void insert(int info)
     {
         No aux = inicio;
@@ -352,14 +374,15 @@ public class Lista
     {
         int i = 0;
         No temp = inicio;
-        while(temp != null && aux != null && temp.getInfo() != aux.getInfo())
+        while (temp != null && aux != null && temp.getInfo() != aux.getInfo())
         {
             i++;
             temp = temp.getProx();
         }
-        
+
         return i;
     }
+
     public void QuickCP(int ini, int fim)
     {
         No i = getIndex(ini);
@@ -376,7 +399,7 @@ public class Lista
                 comp++;
             }
             while (j.getInfo() > pivo.getInfo())
-            {                
+            {
                 j = j.getAnt();
                 comp++;
             }
@@ -391,10 +414,14 @@ public class Lista
                 j = j.getAnt();
             }
         }
-        if(ini < getPos(j))
+        if (ini < getPos(j))
+        {
             QuickCP(ini, getPos(j));
-        if(getPos(i) < fim)
+        }
+        if (getPos(i) < fim)
+        {
             QuickCP(getPos(i), fim);
+        }
     }
 
     public int buscaBinaria(int chave, int tl)
@@ -501,10 +528,11 @@ public class Lista
             dist = dist / 2;
         }
     }
+
     public void setInfoPos(int pos, int num, No l)
     {
         int i = 0;
-        while(l != null && i != pos)
+        while (l != null && i != pos)
         {
             l = l.getProx();
             i++;
@@ -516,31 +544,31 @@ public class Lista
     {
         int i = 0;
         No aux = inicio;
-        while( aux != null && i != num)
+        while (aux != null && i != num)
         {
             aux = aux.getProx();
             i++;
         }
         return aux.getInfo();
     }
+
     public void fusaoMerge(Lista l1, Lista l2, int seq)
     {
         int i = 0, j = 0, k = 0, auxSeq = seq;
         No lista1 = l1.getInicio();
         No lista2 = l2.getInicio();
         No aux = inicio;
-        
-        while(k < tl)
+
+        while (k < tl)
         {
-            while(aux != null && i < seq && j < seq)
+            while (aux != null && i < seq && j < seq)
             {
-                if(lista1.getInfo() < lista2.getInfo())
+                if (lista1.getInfo() < lista2.getInfo())
                 {
                     aux.setInfo(lista1.getInfo());
                     lista1 = lista1.getProx();
                     i++;
-                }
-                else
+                } else
                 {
                     aux.setInfo(lista2.getInfo());
                     lista2 = lista2.getProx();
@@ -549,64 +577,69 @@ public class Lista
                 aux = aux.getProx();
                 k++;
             }
-            while(aux != null && i < seq)
+            while (aux != null && i < seq)
             {
                 aux.setInfo(lista1.getInfo());
                 lista1 = lista1.getProx();
                 aux = aux.getProx();
-                i++;                
+                i++;
                 k++;
             }
-            while(aux != null && j < seq)
+            while (aux != null && j < seq)
             {
                 aux.setInfo(lista2.getInfo());
                 lista2 = lista2.getProx();
                 aux = aux.getProx();
-                j++;                
+                j++;
                 k++;
             }
             seq += auxSeq;
         }
     }
+
     public void particaoLista(Lista l1, Lista l2)
     {
         No principal = inicio;
-        for (int i = 0, j = tl / 2; i < tl /2 ; i++, j++)
+        for (int i = 0, j = tl / 2; i < tl / 2; i++, j++)
         {
             l1.insert(principal.getInfo());
             l2.insert(getInfoPos(j));
             principal = principal.getProx();
         }
     }
+
     public void mergeListaI()
     {
         int seq = 1;
         Lista l1 = new Lista();
         Lista l2 = new Lista();
-        
-        while(seq <= tl / 2)
+
+        while (seq <= tl / 2)
         {
             particaoLista(l1, l2);
             fusaoMerge(l1, l2, seq);
             seq *= 2;
         }
     }
+
     public void mergeSortListaII()
     {
         Lista list = new Lista();
-        mergeListaRecursivo(list, 0, tl-1);        
+        mergeListaRecursivo(list, 0, tl - 1);
     }
+
     public void mergeListaRecursivo(Lista l1, int esq, int dir)
     {
         int meio;
-        if(esq < dir)
+        if (esq < dir)
         {
             meio = (esq + dir) / 2;
             mergeListaRecursivo(l1, esq, meio);
-            mergeListaRecursivo(l1, meio+1, dir);
-            fusaoMergeLista(l1, esq, meio, meio+1, dir);
+            mergeListaRecursivo(l1, meio + 1, dir);
+            fusaoMergeLista(l1, esq, meio, meio + 1, dir);
         }
     }
+
     public void fusaoMergeLista(Lista l1, int ini1, int fim1, int ini2, int fim2)
     {
         int i = ini1, j = ini2, k = 0;
@@ -614,16 +647,15 @@ public class Lista
         No aux2 = getNo(j);
         No principal = inicio;
         No lista;
-        while(i <= fim1 && j <=fim2)
+        while (i <= fim1 && j <= fim2)
         {
-            if(aux1.getInfo() < aux2.getInfo())
+            if (aux1.getInfo() < aux2.getInfo())
             {
                 l1.insert(aux1.getInfo());
                 i++;
                 mov++;
                 aux1 = aux1.getProx();
-            }
-            else
+            } else
             {
                 l1.insert(aux2.getInfo());
                 j++;
@@ -632,14 +664,14 @@ public class Lista
             }
             k++;
         }
-        while(i <= fim1)
+        while (i <= fim1)
         {
             l1.insert(aux1.getInfo());
             i++;
             aux1 = aux1.getProx();
             mov++;
         }
-        while(j <= fim2)
+        while (j <= fim2)
         {
             l1.insert(aux2.getInfo());
             j++;
@@ -647,88 +679,224 @@ public class Lista
             mov++;
         }
         lista = l1.getInicio();
-        for ( i = 0; i < k; i++)
+        for (i = 0; i < k; i++)
         {
-            setInfoPos(i+ini1, lista.getInfo(), principal);
+            setInfoPos(i + ini1, lista.getInfo(), principal);
             lista = lista.getProx();
         }
     }
-    
-    
-    
+
     public void heap()
     {
         int n, tl = 0;
         No pai, fd, fe, fmaior, fim = inicio;
-        
-        while(fim.getProx() != null)
+
+        while (fim.getProx() != null)
         {
             fim = fim.getProx();
             tl++;
         }
-        tl ++;
-        
-        while(fim != inicio)
+        tl++;
+
+        while (fim != inicio)
         {
-            for(n = tl / 2 - 1; n >= 0; n--)
+            for (n = tl / 2 - 1; n >= 0; n--)
             {
-                if(n == 0)
+                if (n == 0)
+                {
                     pai = inicio;
-                else                    
+                } else
+                {
                     pai = localizaNo(inicio, n);
+                }
                 fe = localizaNo(inicio, n + n + 1);
                 fd = localizaNo(fe, 1);
 
                 fmaior = fe;
 
-                if(n + n + 2 < tl && fd.getInfo()> fe.getInfo())
+                if (n + n + 2 < tl && fd.getInfo() > fe.getInfo())
+                {
                     fmaior = fd;
+                }
 
-                if(fmaior.getInfo() > pai.getInfo())
+                if (fmaior.getInfo() > pai.getInfo())
+                {
                     permutacao(pai, fmaior);
+                }
             }
-            
+
             permutacao(inicio, fim);
-            
+
             tl--;
             fim = fim.getAnt();
         }
     }
-    
-    
-    
-    
+
     private No localizaNo(No no, int qntd)
     {
-        if(qntd == 0) //Posicionar no fim da lista
+        if (qntd == 0) //Posicionar no fim da lista
         {
-            while(no.getProx() != null)
-                no = no.getProx();
-        }
-        else
-        {
-           while(qntd != 0 && no != null)
+            while (no.getProx() != null)
             {
-                if(qntd > 0)
+                no = no.getProx();
+            }
+        } else
+        {
+            while (qntd != 0 && no != null)
+            {
+                if (qntd > 0)
                 {
                     no = no.getProx();
                     qntd--;
-                }
-                else
+                } else
                 {
                     no = no.getAnt();
                     qntd++;
                 }
-            } 
+            }
         }
         return no;
     }
-    
+
     private void permutacao(No no1, No no2)
     {
         No aux = new No(no1.getInfo());
-        
+
         no1.setInfo(no2.getInfo());
         no2.setInfo(aux.getInfo());
+    }
+
+    public void countSort(int mag)
+    {
+        int[] cvet = new int[10];
+        No aux = inicio;
+        Lista auxvet = new Lista();
+        No[] temp = new No[getTl()];
+        int div = 1;
+        for (int i = 0; i < mag; i++)
+        {
+            div *= 10;
+        }
+        while (aux != fim)
+        {
+            cvet[aux.getInfo() % div]++;
+        }
+        for (int i = 9; i > 0; i--)
+        {
+            cvet[i] += cvet[i - 1];
+        }
+        aux = inicio;
+        for (int i = 0; i < tl; i++)
+        {
+            temp[cvet[aux.getInfo() % div]] = new No(aux.getInfo());
+        }
+        aux = inicio;
+        for (int i = 0; i < tl; i++)
+        {
+            permutacao(aux, temp[i]);
+            aux = aux.getProx();
+        }
+    }
+
+    public int getMax()
+    {
+        No aux = inicio;
+        int maior = 0;
+        
+        while( aux != null)
+        {
+            if(aux.getInfo() > maior)
+                maior = aux.getInfo();            
+            aux = aux.getProx();
+        }
+        return maior;
+    }
+    
+    public void radixSort()
+    {
+        int max = getMax();
+        int mag = (int) (Math.log10(max) + 1);
+
+        for (int i = mag; i > 0; i--)
+        {
+            countSort(i);
+        }
+    }
+
+    public void tempInsercaoVetor(No[] vet)
+    {
+        int pos;
+        No aux;
+        for (int i = 1; i < vet.length; i++)
+        {
+            pos = i;
+            aux = vet[i];
+            while (pos > 0 && aux.getInfo() < vet[pos - 1].getInfo())
+            {
+                permutacao(vet[pos], vet[pos - 1]);
+                pos--;
+            }
+            vet[pos] = aux;
+        }
+    }
+    public void bucketSort()
+    {
+        No[][] mataux = new No[10][tl];
+        int[] maxpos = new int[10];
+        No aux = inicio;
+        int dig;
+        while (aux != fim)
+        {
+            dig = aux.getInfo() % 10;
+            mataux[dig][maxpos[dig]++] = aux;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            tempInsercaoVetor(mataux[i]);
+        }
+
+        aux = inicio;
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < maxpos[i]; j++)
+            {
+                permutacao(aux, mataux[i][j]);
+            }
+        }
+    }
+    public void combSort()
+    {
+        No aux = inicio;
+        No aux2;
+        boolean troca = false;
+        int fator = (int) (tl / 1.3);
+        do
+        {
+            while (aux != fim)
+            {
+                aux2 = getPosNode(inicio, getIndex(aux) + fator);
+                if (aux.getInfo() < aux2.getInfo())
+                {
+                    permutacao(aux, aux2);
+                    troca = true;
+                }
+            }
+            fator = (int) (fator / 1.3);
+        } while (troca);
+    }
+    public void gnomeSort()
+    {
+        No aux = inicio;
+        while (aux.getProx() != null)
+        {
+            if (aux.getInfo() > aux.getProx().getInfo())
+            {
+                permutacao(aux, aux.getProx());
+                aux = aux.getAnt();
+            } else
+            {
+                aux = aux.getProx();
+            }
+        }
     }
 } // FIM DA CLASSE LISTA
