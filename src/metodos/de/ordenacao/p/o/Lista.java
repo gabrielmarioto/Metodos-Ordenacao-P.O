@@ -899,4 +899,85 @@ public class Lista
             }
         }
     }
+    
+    private void MergedoTim(int l, int m, int r) {
+
+        int len1 = m - l + 1, len2 = r - m;
+        int[] left = new int[len1];
+        int[] right = new int[len2];
+        for (int x = 0; x < len1; x++) {
+            left[x] = getNo(l + x).getInfo();
+        }
+
+        for (int x = 0; x < len2; x++) {
+            right[x] = getNo(m + 1 + x).getInfo();
+        }
+
+        int i = 0;
+        int j = 0;
+        int k = l;
+
+        while (i < len1 && j < len2) {
+            if (left[i] <= right[j]) {
+                getNo(k).setInfo(left[i]);
+                i++;
+            } else {
+                getNo(k).setInfo(right[j]);
+
+                j++;
+            }
+            k++;
+        }
+
+        while (i < len1) {
+            getNo(k).setInfo(left[i]);
+
+            k++;
+            i++;
+        }
+
+        while (j < len2) {
+            getNo(k).setInfo(right[j]);
+
+            k++;
+            j++;
+        }
+    }
+    void insertionSortdoTim(int left, int right) {
+        int temp, j;
+        for (int i = left + 1; i <= right; i++) {
+            temp = getNo(i).getInfo();
+            j = i - 1;
+            while (getNo(j).getInfo() > temp && j >= left) {
+
+                getNo(j + 1).setInfo(getNo(j).getInfo());
+                j--;
+            }
+            getNo(j + 1).setInfo(temp);
+        }
+    }
+    public void TimSort() 
+    {
+        int n = tl, RUN = 32;
+        int menor;
+
+        for (int i = 0; i < n; i = i + RUN) {
+            if (i + 31 < n - 1) {
+                menor = i + 31;
+            } else {
+                menor = n - 1;
+            }
+            insertionSortdoTim(i, menor);
+        }
+
+        for (int size = RUN; size < n; size = 2 * size) {
+            for (int left = 0; left < n; left += 2 * size) {
+
+                int mid = left + size - 1;
+                int right = Math.min((left + 2 * size - 1), (n - 1));
+
+                MergedoTim(left, mid, right);
+            }
+        }
+    }
 } // FIM DA CLASSE LISTA
