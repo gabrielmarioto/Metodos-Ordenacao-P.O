@@ -979,6 +979,11 @@ public class Principal
     public static void main(String[] args) throws IOException
     {
         // TODO code application logic here
+        
+        //Somente não possui o metodo Tim Sort em Lista.
+        //Os arquivos e listas estão indo com 8 a 10 dados preenchidos, para não demorar a executação dos métodos
+        //A tabela está feita corretamente.
+        //Caso ocorre erro na hora da execução, apagar os arquivos: Ordenado, Randomico, Reverso, auxRev e auxRand, pois as vezes o tamanho deles acabam bugando.
         Principal p = new Principal();
         p.geraTabela();
 //        p.MetodosLista();
