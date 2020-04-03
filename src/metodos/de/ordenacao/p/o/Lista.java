@@ -125,7 +125,7 @@ public class Lista
 
     public void geraListaOrdenada()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 1024; i++)
         {
             No aux = new No(i);
             insereNo(aux);
@@ -134,7 +134,7 @@ public class Lista
 
     public void geraListaReversa()
     {
-        for (int i = 9; i >= 0; i--)
+        for (int i = 1023; i >= 0; i--)
         {
             No aux = new No(i);
             insereNo(aux);

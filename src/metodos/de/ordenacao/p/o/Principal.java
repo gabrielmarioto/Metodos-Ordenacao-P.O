@@ -985,7 +985,6 @@ public class Principal
     {
         // TODO code application logic here
         
-        //Os arquivos e listas estão indo com 8 a 10 dados preenchidos, para não demorar a executação dos métodos
         //A tabela está feita corretamente.
         //Caso ocorre erro na hora da execução, apagar os arquivos: Ordenado, Randomico, Reverso, auxRev e auxRand, pois as vezes o tamanho deles acabam bugando.
         Principal p = new Principal();

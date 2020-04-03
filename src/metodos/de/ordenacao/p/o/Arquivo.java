@@ -125,8 +125,7 @@ public class Arquivo
 
     public void geraArquivoOrdenado()
     {
-//        for (int i = 0; i < 1024; i++) 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 1024; i++) 
         {
             new Registro(i).gravaNoArq(arquivo);
         }
@@ -134,8 +133,7 @@ public class Arquivo
 
     public void geraArquivoReverso()
     {
-//        for (int i = 1023; i >= 0; i--) 
-        for (int i = 8; i >= 0; i--)
+        for (int i = 1023; i >= 0; i--) 
         {
             new Registro(i).gravaNoArq(arquivo);
         }
@@ -144,8 +142,7 @@ public class Arquivo
     public void geraArquivoRandomico()
     {
         Random random = new Random();
-//        for (int i = 0; i < 1024; i++) 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 1024; i++) 
         {
             new Registro(random.nextInt(10)).gravaNoArq(arquivo);
         }
